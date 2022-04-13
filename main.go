@@ -4,7 +4,7 @@ Copyright © 2022 chenran <chenran@nawaa.com>
 */
 package main
 
-import "github.com/cerca-trova/cmd/cmd"
+import cmd "github.com/cerca-trova/cmd/cli"
 
 func main() {
 	cmd.Execute()
