@@ -5,22 +5,36 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cli
 
 import (
+	"database/sql"
 	"fmt"
+	"log"
 	"os"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/spf13/cobra"
 )
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "cmd",
-	Short: "Print hostname",
-	Long:  `Print current hostname.`,
+	Short: "show databases",
+	Long:  `show aliyun mysql database version.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		hostname, _ := os.Hostname()
-		fmt.Printf("your homename is %s", hostname)
+		var version string
+		db, err := sql.Open("mysql", "chenran:Nawaa@1234@tcp(rm-bp1n1ucv8804d97632o.mysql.rds.aliyuncs.com)/mysql")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		defer db.Close()
+		err2 := db.QueryRow("select version()").Scan(&version)
+		if err2 != nil {
+			log.Fatal(err2)
+		}
+
+		fmt.Printf("mysql verison is %s", version)
 	},
 }
 
