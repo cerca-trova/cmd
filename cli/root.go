@@ -34,7 +34,7 @@ var rootCmd = &cobra.Command{
 			log.Fatal(err2)
 		}
 
-		fmt.Printf("mysql verison is %s", version)
+		fmt.Printf("mysql verison is %s \n", version)
 	},
 }
 
